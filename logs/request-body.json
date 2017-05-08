@@ -1,0 +1,77 @@
+{
+  "id": "b5293284-6311-4b23-93cb-f5c56f189206",
+  "timestamp": "2017-05-08T13:51:54.141Z",
+  "lang": "en",
+  "result": {
+    "source": "agent",
+    "resolvedQuery": "what is the next talk about iot",
+    "speech": "",
+    "action": "talks.by.topic",
+    "actionIncomplete": false,
+    "parameters": {
+      "date": "",
+      "topic-name": "iot",
+      "date-period": "the next",
+      "talk-type": "presentation"
+    },
+    "contexts": [
+      {
+        "name": "_actions_on_google_",
+        "parameters": {
+          "date": "",
+          "topic-name.original": "iot",
+          "date.original": "",
+          "talk-type": "presentation",
+          "date-period.original": "the next",
+          "topic-name": "iot",
+          "talk-type.original": "talk",
+          "date-period": "the next"
+        },
+        "lifespan": 99
+      },
+      {
+        "name": "find-next-by-topic",
+        "parameters": {
+          "date": "",
+          "talkIds": [
+            null,
+            null,
+            null,
+            null
+          ],
+          "totalSessions": 4,
+          "topic-name.original": "iot",
+          "sessionIndex": 0,
+          "date.original": "",
+          "talk-type": "presentation",
+          "date-period.original": "the next",
+          "topic-name": "iot",
+          "talk-type.original": "talk",
+          "date-period": "the next"
+        },
+        "lifespan": 2
+      }
+    ],
+    "metadata": {
+      "intentId": "e602fcb4-4b19-452b-b926-ff24a94a373d",
+      "webhookUsed": "true",
+      "webhookForSlotFillingUsed": "false",
+      "intentName": "talks.by.topic"
+    },
+    "fulfillment": {
+      "speech": "",
+      "messages": [
+        {
+          "type": 0,
+          "speech": ""
+        }
+      ]
+    },
+    "score": 0.92
+  },
+  "status": {
+    "code": 200,
+    "errorType": "success"
+  },
+  "sessionId": "930424ba-db09-44b1-bd9f-51dbd822ed8d"
+}
