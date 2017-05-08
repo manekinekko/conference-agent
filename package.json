@@ -18,6 +18,7 @@
     "dependencies": {
         "actions-on-google": "^1.0.9",
         "asyncawait": "^1.0.6",
+        "elasticlunr": "^0.9.5",
         "global": "^4.3.2",
         "ngrok": "^2.2.8",
         "node-fetch": "^1.6.3"
