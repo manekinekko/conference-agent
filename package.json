@@ -1,0 +1,25 @@
+{
+    "name": "devoxx-agent",
+    "version": "1.0.0",
+    "private": true,
+    "scripts": {
+        "f": "functions",
+        "prestart": "functions start",
+        "start": "functions deploy devoxx --trigger-http",
+        "predebug": "npm start",
+        "debug": "functions debug devoxx",
+        "ngrok": "ngrok http 8010",
+        "deploy": "rm -rf node_modules; gcloud alpha functions deploy devoxx --project devoxx-agent --trigger-http --stage-bucket gs://devoxx-agent/"
+    },
+    "description": "Google Assistant Agent for Devoxx Conferences",
+    "main": "index.js",
+    "repository": "",
+    "author": "Wassim Chegham",
+    "dependencies": {
+        "actions-on-google": "^1.0.9",
+        "asyncawait": "^1.0.6",
+        "global": "^4.3.2",
+        "ngrok": "^2.2.8",
+        "node-fetch": "^1.6.3"
+    }
+}
