@@ -3,13 +3,6 @@ process.env.DEBUG = 'actions-on-google:*';
 const fs = require('fs');
 const ApiAiAssistant = require('actions-on-google').ApiAiAssistant;
 const fetch = require('node-fetch');
-const elasticlunr = require('elasticlunr');
-const elastic = elasticlunr(function() {
-    this.addField('title');
-    this.addField('summary');
-    this.setRef('track');
-    this.setRef('roomName');
-});
 
 // intents
 const LIST_TOPICS_INTENT = 'topics.list';
@@ -44,14 +37,6 @@ const helpers = {
             .then(data => data.map(d => d.slots))
             .then(slots => {
                 __CACHE = [].concat(...slots);
-                __CACHE.forEach(slot => {
-                    index.addDoc({
-                        summary: slot.talk.summary,
-                        title: slot.talk.title,
-                        track: slot.talk.track,
-                        roomName: slot.roomName,
-                    });
-                });
                 return __CACHE;
             });
     },
@@ -65,8 +50,8 @@ const helpers = {
 const predicates = {
     byTalkId(schedule, id) {
         return schedule
-            .filter(slot => slot.talk)
-            .map(slot => slot.talk.id === id);
+            .filter(slot => slot.talk && slot.talk.id === id)
+            .pop();
     },
     byTalkName(schedule) {
         return schedule
@@ -192,17 +177,13 @@ const intents = {
 
         helpers.fetchSchedule()
             .then(schedule => helpers.filter(schedule, predicates.byTalkId, currentTalkId))
-            .then(talk => {
-                console.log('sessionIndex: ' + sessionIndex + ', title: ' + talk.session_name);
-
-                // let time = `${talk.start_hour}:${talk.start_min}`;
-                let time = (talk.start_hour % 12) + ':' + talk.start_min +
-                    (talk.start_hour < 12 ? 'AM' : 'PM');
+            .then(slot => {
+                const amPm = +slot.fromTime.split(':')[0] > 12 ? 'PM' : 'AM';
+                const time = `${slot.fromTime} ${amPm}`;
 
                 assistant.ask(`Sure, here is more information! 
-                   The presentation starts at ${time}, 
-                   in ${talk.room} at ${talk.building}. 
-                   The abstract says: ${talk.description}. 
+                   The presentation starts at ${time}, in ${slot.roomName}. 
+                   The abstract says: ${slot.talk.summary}. 
                    Would you like to hear about the next session?`);
             })
             .catch(error => {
