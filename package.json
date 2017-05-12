@@ -9,6 +9,7 @@
         "predebug": "npm start",
         "debug": "functions debug devoxx",
         "ngrok": "ngrok http 8010",
+        "logs": "tail -f /Users/wassimchegham/.config/yarn/global/node_modules/@google-cloud/functions-emulator/logs/cloud-functions-emulator.log",
         "deploy": "rm -rf node_modules; gcloud alpha functions deploy devoxx --project devoxx-agent --trigger-http --stage-bucket gs://devoxx-agent/"
     },
     "description": "Google Assistant Agent for Devoxx Conferences",
@@ -20,6 +21,7 @@
         "asyncawait": "^1.0.6",
         "global": "^4.3.2",
         "ngrok": "^2.2.8",
-        "node-fetch": "^1.6.3"
+        "node-fetch": "^1.6.3",
+        "twilio": "^3.0.0"
     }
 }
